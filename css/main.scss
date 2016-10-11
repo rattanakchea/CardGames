@@ -1,0 +1,28 @@
+body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.game-canvas {
+  border:1px solid grey;
+  border-radius: 3px;
+  background: #287B59;
+  padding: 1em;
+  font-size:1.2em;
+  min-height:20em;
+}
+
+.card {
+  background:#fff;
+  border: 1px solid gray;
+  border-radius:4px;
+  box-shadow:0 2px 2px 1px #999;
+  font-size: 20pt;
+  width:  4.25em;
+  height: 6em;
+  padding:.1em;
+  margin-right:-1em;
+}

@@ -6,8 +6,10 @@
 // BlackJack Game Constructor
 
 
+
+
 //blackJack Game
-var BlackGame = function (){
+var BlackJack = function (){
 
     var self = this;
     this.deck = new Deck();
@@ -18,12 +20,17 @@ var BlackGame = function (){
     this.loses = 0;
 
 
+    //Todo Work on the UI
+
+
+
+    //Work on the logic of the game
 
 
 
 
 };
 
-BlackGame.prototype.toString = function(){
+BlackJack.prototype.toString = function(){
     return "BlackJack Game";
 }
