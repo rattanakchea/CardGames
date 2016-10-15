@@ -3,7 +3,7 @@
  */
 "use strict";
 
-// Hand Constructor
+// Hand Constructor is similar to Deck
 // contain an array of cards
 // can sort cards by value
 // find pairs
@@ -12,13 +12,31 @@
 
 var Hand = function (){
 
-    var cards = [];
+    this.cards = [];
 
+
+    this.removeCard = function(){
+        return this.cards.pop();
+    }
+
+    this.addCard = function(card){
+        this.cards.push(card);
+    }
+
+    //display all cards in the hands
+    //maybe need to creat a viewHand
+    this.render = function(){
+
+    }
 
 
 
 };
 
 Hand.prototype.toString = function(){
-    return "Hand";
-}
+    return this.cards;
+};
+
+Hand.prototype.hello = function(){
+    return 'hello hand';
+};

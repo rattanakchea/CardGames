@@ -1,20 +1,35 @@
-$( document ).ready(function() {
+var g = game = new BlackJack();
 
-    //inside an anonymouse function
-    console.log( "let's play!" );
+$( document ).ready(function(game) {
 
+    console.log(game)
 
-    var game = new BlackJack();
-    console.log(game);
+    var playerHand = game.playerHand,
+        dealerHand = game.dealerHand,
+        deck = game.deck;
 
-    var $yourHand = $('#your-hand'),
-        $dealerHand = $('#dearler-hand'),
-        $hitBtn = $('#hit'),
-        $standBtn = $('#stand'),
-        $newGameBtn = $('#deal');
-
-
+    //cach DOM elements
+    var $btn_deal = $('#deal'),
+        $btn_hit = $('#hit'),
+        $btn_stand = $('#stand');
 
 
+    //event listeners
+    $btn_deal.on('click', startGame);
 
-});
+
+
+    //deal two cards for player, and two cards for dealer's hand
+    function startGame(){
+        console.log('game start..');
+
+        var aCard = deck.deal()
+
+        playerHand.addCard(aCard);
+
+        console.log(playerHand);
+
+    }
+
+
+}(g));

@@ -11,7 +11,7 @@
 
 var Deck = function (){
 
-
+    //array of 52 cards when initialized
     var cards_array = [];
 
     this.cards = cards_array;
