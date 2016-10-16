@@ -24,7 +24,7 @@ body {
   display: inline-block; }
 
 .hidden {
-  background: orangered; }
+  background: lightgrey; }
 
 .Spades, .Clubs {
   color: black; }
