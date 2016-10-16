@@ -20,9 +20,16 @@ body {
   border: 1px solid gray;
   border-radius:4px;
   box-shadow:0 2px 2px 1px #999;
-  font-size: 20pt;
   width:  4.25em;
   height: 6em;
   padding:.1em;
-  margin-right:-1em;
+  display: inline-block;
+
 }
+
+.hidden {
+  background: orangered;
+}
+
+.Spades, .Clubs {color:black}
+.Diamonds, .Hearts {color:red}

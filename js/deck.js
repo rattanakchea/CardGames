@@ -12,12 +12,12 @@
 var Deck = function (){
 
     //array of 52 cards when initialized
-    var cards_array = [];
+    //var cards_array = [];
 
-    this.cards = cards_array;
+    this.cards = [];
 
     this.size = function(){
-        return cards_array.length;
+        return this.cards.length;
     };
 
     this.deal = function(){
@@ -26,28 +26,31 @@ var Deck = function (){
             init();
         }
 
-        return cards_array.pop();
-    };
-
-    this.shuffle = function(){
-        cards_array = _.shuffle(cards_array);
+        return this.cards.pop();
     };
 
     this.getCards = function(){
-        return cards_array;
+        return this.cards;
     }
+
+
+    this.shuffle = function(){
+        this.cards = _.shuffle(this.cards);
+    };
+
+    var self = this;
 
 
     function init(){
         for (var i=0; i <= 51; i++){
             var value = i % 13 + 1;
             var suit = i % 4 + 1;
-
             //card cannot be uppercase
             var card = new Card(value, suit);
-
-            cards_array.push(card);
+            self.cards.push(card);
         }
+
+        self.shuffle();
     }
     init();
 

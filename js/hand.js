@@ -29,6 +29,8 @@ var Hand = function (){
 
     }
 
+    this.length = this.cards.length;
+
 
 
 };

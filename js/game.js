@@ -5,9 +5,6 @@
 
 // BlackJack Game Constructor
 
-
-
-
 //blackJack Game
 var BlackJack = function (){
 
@@ -16,17 +13,11 @@ var BlackJack = function (){
     this.dealerHand = new Hand();
     this.playerHand = new Hand();
 
+    this.playerHandView = new HandView(this.playerHand, '#your-hand');
+    this.dealerHandView = new HandView(this.dealerHand, '#dealer-hand');
+
     this.wins = 0;
     this.loses = 0;
-
-
-
-
-    //Work on the logic of the game
-
-
-
-
 
 };
 

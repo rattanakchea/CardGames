@@ -3,7 +3,7 @@
  */
 "use strict";
 
-var suitsMap = ['Clubs', 'Diamonds','Hearts', 'Spades'];
+
 var cardValuesMap = {
     'Ace': 1,
     'Jack': 11,
@@ -15,6 +15,11 @@ var cardValuesMap = {
 // Card Constructor
 
 var Card = function (value, suit){
+
+    var suitsMap = ['Clubs', 'Diamonds','Hearts', 'Spades'];
+    var symbolsMap = ['&clubs;', '&diams;','&hearts;', '&spades;'];
+
+
 
     if (!value || !suit && suit !== 0){
         console.warn("A card must have both suit and card");
@@ -46,15 +51,25 @@ var Card = function (value, suit){
         return suitsMap[index];
     };
 
-    this.getValue = function(){
+    this.getValue = function() {
         switch (this.value) {
-            case 1: return 'Ace';
-            case 11: return 'Jack';
-            case 12: return 'Queen';
-            case 13: return 'King'
-            default: return this.value;
+            case 1:
+                return 'A';
+            case 11:
+                return 'J';
+            case 12:
+                return 'Q';
+            case 13:
+                return 'K'
+            default:
+                return this.value;
         }
-    }
+    };
+
+    this.getSymbol = function(){
+        var index = this.suit -1;
+        return symbolsMap[index];
+    };
 
 
 };
