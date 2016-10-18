@@ -1,5 +1,4 @@
 var HandView = function(Hand, id){
-    this.template = _.template(cardTemplate);
     this.collection = Hand;
     this.el = id;
 
