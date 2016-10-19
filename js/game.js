@@ -5,9 +5,6 @@
 
 // BlackJack Game Constructor
 
-var playerScore = 0,
-    dealerScore = 0;
-
 //blackJack Game
 var BlackJack = function (){
 
@@ -26,23 +23,8 @@ var BlackJack = function (){
 
     this.events.on('playerWins', playerWins);
 
-    // result, msg
-    this.updateScore = function(result, msg){
-        if (result === 'win'){
-            playerScore++;
-        } else if (result === 'lose'){
-            dealerScore++;
-        }
-
-        $('#stats').find('.win').html(playerScore);
-        $('#stats').find('.lose').html(dealerScore);
-        $('#status').html(msg);
-    }
-
+    //for pub-sub events, not used now
     function playerWins (msg){
-        alert('win: ', playerScore);
-        console.log('playerWin event emits: ', msg);
-
         $('#stats').find('.win').html(++playerScore);
     }
 

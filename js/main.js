@@ -1,5 +1,8 @@
 $( document ).ready(function() {
 
+    var playerScore = 0,
+        dealerScore = 0;
+
     var game, playerHand, dealerHand,
         deck, playerHandView, dealerHandView;
 
@@ -32,8 +35,7 @@ $( document ).ready(function() {
         var dealerScore = dealerHandView.getScore();
 
         if (dealerScore > 16 && dealerScore > playerHandView.getScore()){
-            $status.html('Dealer Won.');
-            cleanSlate();
+            updateScore('lose', 'Dealer won.');
             return;
         }
 
@@ -44,11 +46,7 @@ $( document ).ready(function() {
             dealerScore = dealerHandView.getScore();
             $dealerScore.html(dealerScore);
         }
-
-
         standScoreCheck(dealerScore);
-
-        //cleanSlate();
     }
 
     function cleanSlate(){
@@ -79,27 +77,20 @@ $( document ).ready(function() {
     }
 
     function standScoreCheck(dealerScore){
-
-        console.log('calling stand score check');
-
         var yourScore = playerHandView.getScore();
 
        if (dealerScore > 21){
-           $status.html('Dealer busted. You won');
            //game.events.emit('playerWins', msg);
             //what is the difference from calling a function, to update score
-           game.updateScore('win', 'woowoo, you won');
+           updateScore('win', 'Dealer got bused. You won');
 
        } else if (dealerScore > yourScore) {
-           $status.html('Dealer Won');
+           updateScore('lose', 'Dealer won.');
        } else if (dealerScore < yourScore){
-
-           game.events.emit('playerWins', "You won");
+           updateScore('win', 'You won.');
        } else {
-            $status.html('It is a draw. !!!!');
-        }
-
-        toggleBtn();
+           updateScore(null, 'It is a draw.');
+       }
     }
 
     //deal two cards for player, and two cards for dealer's hand
@@ -129,18 +120,19 @@ $( document ).ready(function() {
 
     function firstDealCheck(yourScore, dealerScore){
 
+        var gameOver = true;
+
         if (yourScore == 21 && dealerScore != 21) {
-            game.events.emit('playerWins', 'Congratulation, you won. BlackJack !!!!');
-
-            toggleBtn();
-
+            updateScore('win', 'BlackJack. You won.');
         } else if (yourScore == 21 && dealerScore == 21){
-            $status.html('Both have BlackJack. Draw!');
-            toggleBtn();
+            updateScore(null, 'Both BlackJack. It is a draw.');
         } else if (yourScore != 21 && dealerScore == 21){
-            $status.html('Dealer has BlackJack. You lost.');
+            updateScore('lose', 'Dealer has BlackJack. You lost');
+        } else {
+            gameOver = false;
+        }
+        if (gameOver){
             dealerHandView.render();
-            toggleBtn();
         }
         //keep playing
     }
@@ -148,12 +140,22 @@ $( document ).ready(function() {
     // need a seperate check for 2 card deal
     function hitScoreCheck(yourScore, dealerScore){
         if (yourScore > 21) {
-            $status.html('Sorry. You are busted. You lost');
-            toggleBtn();
-
+            updateScore('lose', 'You get busted. You lost');
         } else if (yourScore == 21) {
             stand();
         }
+    }
+
+    // result, msg
+    function updateScore (result, msg){
+        if (result === 'win'){
+            $('#stats').find('.win').html(++playerScore);
+        } else if (result === 'lose'){
+            $('#stats').find('.lose').html(++dealerScore);
+        }
+
+        $('#status').html(msg);
+        toggleBtn();
     }
 
 

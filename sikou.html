@@ -25,7 +25,7 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>Welcome to the game</h1>
+        <h1>Welcome to the Si Kou</h1>
     </div>
 
     <div class="row">
@@ -36,12 +36,37 @@
                 <p>Win: <span class="win">0</span>   | Lose: <span class="lose">0</span></p>
             </div>
 
+            <div class="gameControl">
+                <button id="deal" type="button" class="btn btn-warning">New Game</button>
+                <button id="hit" type="button" class="btn btn-primary">Hit</button>
+                <button id="stand" type="button" class="btn btn-info">Stand</button>
+
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="game-canvas col-xs-12">
+            <div class="row">
+                <div class="col-md-12 col-lg-6">
+                    <p>Your Hand -  <span id="yourScore"></span></p>
+                    <div id="your-hand">
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <p>Dealer's Hand - <span id="dealerScore"></span></p>
+                    <div id="dealer-hand">
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <br/>
+    <p><a href="http://www.bicyclecards.com/how-to-play/blackjack/">Rule of Sikou</a></p>
 
 </div><!-- /.container -->
 
