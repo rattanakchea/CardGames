@@ -8,7 +8,6 @@
 //blackJack Game
 var BlackJack = function (){
 
-    var self = this;
     this.deck = new Deck();
     this.dealerHand = new Hand();
     this.playerHand = new Hand();

@@ -96,7 +96,7 @@ $( document ).ready(function() {
     //deal two cards for player, and two cards for dealer's hand
     function startGame(){
         console.log('game start..');
-        $status.empty();
+        $status.html("Let's play").removeClass();
         cleanSlate();
 
         //initially deal 2 cards for each Hand
@@ -149,12 +149,16 @@ $( document ).ready(function() {
     // result, msg
     function updateScore (result, msg){
         if (result === 'win'){
-            $('#stats').find('.win').html(++playerScore);
+            $('#stats').find('.win').html(++playerScore)
+            $('#status').addClass('text-success').html(msg);
+
         } else if (result === 'lose'){
             $('#stats').find('.lose').html(++dealerScore);
+            $('#status').addClass('text-warning').html(msg);
         }
 
         $('#status').html(msg);
+
         toggleBtn();
     }
 

@@ -1,0 +1,47 @@
+body {
+  padding-top: 5rem; }
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center; }
+
+.game-canvas {
+  border: 1px solid grey;
+  border-radius: 3px;
+  background: #287B59;
+  padding: 1em;
+  font-size: 1.2em;
+  min-height: 20em; }
+
+.card {
+  background: #fff;
+  border: 1px solid gray;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 1px #999;
+  width: 4.25em;
+  height: 6em;
+  padding: .1em;
+  display: inline-block; }
+
+.hidden {
+  background: lightgrey; }
+
+.Spades, .Clubs {
+  color: black; }
+
+.Diamonds, .Hearts {
+  color: red; }
+
+.gameArea {
+  width: 960px;
+  margin: 0 auto; }
+
+li.card {
+  width: 4rem;
+  height: 6rem; }
+
+.throwAwayCards li.card {
+  witdth: 3rem;
+  height: 5rem; }
+
+/*# sourceMappingURL=sikou.css.map */

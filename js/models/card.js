@@ -16,11 +16,6 @@ var cardValuesMap = {
 
 var Card = function (value, suit){
 
-    var suitsMap = ['Clubs', 'Diamonds','Hearts', 'Spades'];
-    var symbolsMap = ['&clubs;', '&diams;','&hearts;', '&spades;'];
-
-
-
     if (!value || !suit && suit !== 0){
         console.warn("A card must have both suit and card");
         return;
@@ -44,36 +39,36 @@ var Card = function (value, suit){
         return;
     }
 
+};
 
+Card.prototype.suitsMap = ['Clubs', 'Diamonds','Hearts', 'Spades'];
+Card.prototype.symbolsMap = ['&clubs;', '&diams;','&hearts;', '&spades;'];
 
-    this.getSuit = function(){
-        var index = this.suit -1;
-        return suitsMap[index];
-    };
+Card.prototype.getSuit = function(){
+    var index = this.suit -1;
+    return this.suitsMap[index];
+};
 
-    this.getValue = function() {
-        switch (this.value) {
-            case 1:
-                return 'A';
-            case 11:
-                return 'J';
-            case 12:
-                return 'Q';
-            case 13:
-                return 'K'
-            default:
-                return this.value;
-        }
-    };
+Card.prototype.getValue = function() {
+    switch (this.value) {
+        case 1:
+            return 'A';
+        case 11:
+            return 'J';
+        case 12:
+            return 'Q';
+        case 13:
+            return 'K'
+        default:
+            return this.value;
+    }
+};
 
-    this.getSymbol = function(){
-        var index = this.suit -1;
-        return symbolsMap[index];
-    };
-
-
+Card.prototype.getSymbol = function(){
+    var index = this.suit -1;
+    return this.symbolsMap[index];
 };
 
 Card.prototype.toString = function(){
     return "Card is " + this.getValue() + " of " + this.getSuit();
-}
+};

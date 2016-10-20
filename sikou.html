@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>Card Games</title>
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sikou.css">
 </head>
 <body>
 <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
@@ -22,15 +22,15 @@
     </ul>
 </nav>
 
-<div class="container">
+<div class="gameArea">
 
     <div class="starter-template">
-        <h1>Welcome to the Si Kou</h1>
+        <h1>Welcome to Si-Kou</h1>
     </div>
 
     <div class="row">
         <div class="game-info col-xs-12 col-sm-12">
-            <p class="warning"><span id="status"></span></p>
+            <h3 class="alert alert-info text-xs-center"><span id="status">Let's play</span></h3>
 
             <div id="stats">
                 <p>Win: <span class="win">0</span>   | Lose: <span class="lose">0</span></p>
@@ -39,24 +39,58 @@
             <div class="gameControl">
                 <button id="deal" type="button" class="btn btn-warning">New Game</button>
                 <button id="hit" type="button" class="btn btn-primary">Hit</button>
-                <button id="stand" type="button" class="btn btn-info">Stand</button>
-
             </div>
         </div>
     </div>
     <div class="row">
         <div class="game-canvas col-xs-12">
             <div class="row">
-                <div class="col-md-12 col-lg-6">
-                    <p>Your Hand -  <span id="yourScore"></span></p>
-                    <div id="your-hand">
+                <div class="col-xs-6">
+                    <p>Player 1 (6 cards)</p>
+                    <div id="player1">
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                    </div>
+
+                    <div class="throwAwayCards">
                         <li class="card hidden"></li>
                         <li class="card hidden"></li>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-6">
-                    <p>Dealer's Hand - <span id="dealerScore"></span></p>
-                    <div id="dealer-hand">
+                <div class="col-xs-6 text-xs-right">
+                    <p>You - Player 2 (5 cards)</p>
+                    <div id="player2">
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-xs-center">
+                <p>Deck of Remaining Cards</p>
+                <li class="card hidden"></li>
+                <li class="card hidden"></li>
+                <li class="card hidden"></li>
+                <li class="card hidden"></li>
+
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <p>Player 3</p>
+                    <div id="player3">
+                        <li class="card hidden"></li>
+                        <li class="card hidden"></li>
+                    </div>
+                </div>
+                <div class="col-xs-6 text-xs-right">
+                    <p>Player 4</p>
+                    <div id="player4">
                         <li class="card hidden"></li>
                         <li class="card hidden"></li>
                     </div>
@@ -66,7 +100,7 @@
     </div>
 
     <br/>
-    <p><a href="http://www.bicyclecards.com/how-to-play/blackjack/">Rule of Sikou</a></p>
+    <p><a href="rule_of_sikou.html">Rule of Sikou</a></p>
 
 </div><!-- /.container -->
 
@@ -75,20 +109,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="js/libs/bootstrap.js"></script>
 
-<script src="js/libs/events.js"></script>
-
-<script src="js/card.js"></script>
+<script src="js/models/card.js"></script>
 <script src="js/views/cardView.js"></script>
 <script src="js/views/handView.js"></script>
+<script src="js/models/hand.js"></script>
+<script src="js/models/deck.js"></script>
 
-<script src="js/hand.js"></script>
-
-<script src="js/deck.js"></script>
-<script src="js/game.js"></script>
-
-
-
-<script src="js/main.js"></script>
+<script src="js/models/sikou.js"></script>
+<script src="js/sikou_main.js"></script>
 
 </body>
 </html>
