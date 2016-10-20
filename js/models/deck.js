@@ -21,6 +21,7 @@ var Deck = function (){
     };
 
     this.deal = function(numberOfCards){
+        var numberOfCards = numberOfCards || 1;
         if (this.size() === 0){
             console.log('Ran out of card, create a new Deck');
             return;
@@ -30,8 +31,15 @@ var Deck = function (){
             console.warn('Not enough cards to disperse');
             return;
         }
+        if (numberOfCards == 1) {
+            return this.cards.pop();
+        }
 
-        return _.first(this.cards, numberOfCards);
+        var arr = [];
+        for (var i=0; i < numberOfCards; i++){
+            arr.push(this.cards.pop());
+        }
+        return arr;
 
 
     };

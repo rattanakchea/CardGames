@@ -3,8 +3,7 @@ $( document ).ready(function() {
     var playerScore = 0,
         dealerScore = 0;
 
-    var game, playerHand, dealerHand,
-        deck, playerHandView, dealerHandView;
+    var game, deck, playerHandView, dealerHandView;
 
     //cach DOM elements
     var $btn_deal = $('#deal'),
@@ -53,8 +52,6 @@ $( document ).ready(function() {
         toggleBtn();
 
         game = new BlackJack(),
-        playerHand = game.playerHand,
-        dealerHand = game.dealerHand,
         deck = game.deck,
         playerHandView = game.playerHandView,
         dealerHandView = game.dealerHandView;
