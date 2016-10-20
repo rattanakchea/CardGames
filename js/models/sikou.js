@@ -14,25 +14,24 @@ var Sikou = function (numOfPlayers){
 
     //array of players, empty
     this.playerHandViews = [];
-
     for (var i=0; i < numOfPlayers; i++){
         var hand = new Hand();
         var handView = new HandView(hand, '#player1')
         this.playerHandViews.push(handView);
     }
-    init();
-
 
     //array of players,
     //player 1 has 6 cards,
     // other players has 5 cards
-    function init(){
-        _.forEach(this.playerHandView, function(playerHandView){
-            playerHandView.addCard(this.deck.deal(5));
-        });
+    this.init = function(){
+        var self = this;
+        _.each(self.playerHandViews, function(playerHandView){
+            playerHandView.add(self.deck.deal(5));
+        }, self);
 
-        playerHandViews[0].addCard(this.deck.deal())
+        this.playerHandViews[0].add(self.deck.deal())
     }
+    this.init();
 
 
 
@@ -42,6 +41,6 @@ var Sikou = function (numOfPlayers){
 
 };
 
-BlackJack.prototype.toString = function(){
+Sikou.prototype.toString = function(){
     return "Sikou Game";
 }

@@ -4,10 +4,10 @@ $( document ).ready(function() {
         dealerScore = 0;
 
     var game, deck,
-        player1Hand, player1HandView,
-        player2Hand, player2HandView,
-        player3Hand, player3HandView,
-        player4Hand, player4HandView;
+        player1HandView,
+        player2HandView,
+        player3HandView,
+        player4HandView;
 
 
     //cach DOM elements
@@ -28,17 +28,16 @@ $( document ).ready(function() {
 
     function initGame(numOfPlayers){
         toggleBtn();
-        game = new Sikou(numOfPlayers),
-            playerHand = game.playerHand,
-            dealerHand = game.dealerHand,
-            deck = game.deck,
-            playerHandView = game.playerHandView,
-            dealerHandView = game.dealerHandView;
+        game = new Sikou(numOfPlayers);
+
+        console.log(game);
+        debugger;
+
 
     }
 
-    function startSikouGame(numOfPlayers){
-
+    function startSikouGame(){
+        var numOfPlayers = 4;
         initGame(numOfPlayers);
 
 

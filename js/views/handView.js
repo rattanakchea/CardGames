@@ -25,8 +25,14 @@ var HandView = function(Hand, id){
         }
     };
 
+    //can add a card or an array
     this.add = function(card){
-        this.collection.cards.push(card);
+        if (_.isArray(card)) {
+            //concat return a new array
+            this.collection.cards = this.collection.cards.concat(card);
+        } else {
+            this.collection.cards.push(card);
+        }
     };
 
 
