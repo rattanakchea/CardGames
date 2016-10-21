@@ -31,12 +31,9 @@ $( document ).ready(function() {
         game = new Sikou(numOfPlayers);
 
         console.log(game);
-
         game.playerHandViews[0].render();
         game.playerHandViews[1].render();
         debugger;
-
-
     }
 
     function startSikouGame(){
@@ -49,11 +46,5 @@ $( document ).ready(function() {
     function dealCard(){
 
     }
-
-
-
-
-
-
 
 });

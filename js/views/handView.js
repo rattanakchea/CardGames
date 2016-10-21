@@ -5,9 +5,6 @@ var HandView = function(Hand, id){
     this.collection = Hand;
     this.el = id;
 
-
-    //listen for changes
-
     this.render = function() {
         var self = this;
         var html = '';
@@ -65,7 +62,5 @@ var HandView = function(Hand, id){
         }
         return score;
     };
-
-
 
 }

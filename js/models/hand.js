@@ -32,8 +32,6 @@ var Hand = function (){
 
     this.length = this.cards.length;
 
-
-
 };
 
 Hand.prototype.toString = function(){
