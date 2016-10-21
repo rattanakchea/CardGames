@@ -14,9 +14,11 @@ var Sikou = function (numOfPlayers){
 
     //array of players, empty
     this.playerHandViews = [];
-    for (var i=0; i < numOfPlayers; i++){
+
+
+    for (var i=1; i <= numOfPlayers; i++){
         var hand = new Hand();
-        var handView = new HandView(hand, '#player1')
+        var handView = new HandView(hand, '#player'+i)
         this.playerHandViews.push(handView);
     }
 
@@ -27,11 +29,23 @@ var Sikou = function (numOfPlayers){
         var self = this;
         _.each(self.playerHandViews, function(playerHandView){
             playerHandView.add(self.deck.deal(5));
-        }, self);
+        }, this);
 
         this.playerHandViews[0].add(self.deck.deal())
-    }
+    };
+
+    this.startDealing = function(){
+        var self = this;
+        _.each(self.playerHandViews, function(playerHandView){
+            playerHandView.render();
+        }, this);
+    };
+
     this.init();
+    //this.startDealing();
+
+
+
 
 
 

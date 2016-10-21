@@ -9,6 +9,7 @@
 // find pairs
 // get rid of pairs
 // show cards - toString prototype
+// Maybe don't need this moodel ? refactor
 
 var Hand = function (){
 
@@ -26,7 +27,7 @@ var Hand = function (){
     //display all cards in the hands
     //maybe need to creat a viewHand
     this.render = function(){
-
+        console.log('do nothing noow');
     }
 
     this.length = this.cards.length;

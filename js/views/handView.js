@@ -1,4 +1,7 @@
 var HandView = function(Hand, id){
+
+    'use strict';
+
     this.collection = Hand;
     this.el = id;
 
@@ -6,12 +9,13 @@ var HandView = function(Hand, id){
     //listen for changes
 
     this.render = function() {
+        var self = this;
         var html = '';
-        _.forEach(Hand.cards, function(card){
+        _.forEach(this.collection.cards, function(card){
             html += new CardView(card).render();
         });
 
-        $(this.el).html(html);
+        $(self.el).html(html);
     };
 
     this.renderOneCard = function(){
@@ -28,8 +32,11 @@ var HandView = function(Hand, id){
     //can add a card or an array
     this.add = function(card){
         if (_.isArray(card)) {
+            while(card.length > 0){
+                this.collection.cards.push(card.pop());
+            }
             //concat return a new array
-            this.collection.cards = this.collection.cards.concat(card);
+            //this.collection.cards = this.collection.cards.concat(card);
         } else {
             this.collection.cards.push(card);
         }
