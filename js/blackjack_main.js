@@ -154,9 +154,12 @@ $( document ).ready(function() {
             $('#status').addClass('text-warning').html(msg);
         }
 
-        $('#status').html(msg);
-
+        updateGameStatus(msg);
         toggleBtn();
+    }
+
+    function updateGameStatus (statusMsg){
+        $('#status').html(statusMsg);
     }
 
 

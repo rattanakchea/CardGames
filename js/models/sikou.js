@@ -15,6 +15,8 @@ var Sikou = function (numOfPlayers){
     //array of players, empty
     this.playerHandViews = [];
 
+    this.yourHandView;
+
 
     for (var i=1; i <= numOfPlayers; i++){
 
@@ -30,20 +32,91 @@ var Sikou = function (numOfPlayers){
         var self = this;
         _.each(self.playerHandViews, function(playerHandView){
             playerHandView.add(self.deck.deal(5));
-        }, this);
+        });
 
         this.playerHandViews[0].add(self.deck.deal())
+
+        //start dealing cards into each player's hand
+        //this.sortCards();
+        this.startDealing();
+
+        //assign to player 2
+        this.assignPlayer(2)
+    };
+
+    //assign to player
+    this.assignPlayer = function(index){
+        if (index > this.playerHandViews.length){
+            console.log('Overflow index: cannot assign a player bigger than ', this.playerHandViews.length-1);
+            return;
+        }
+        this.yourHandView = this.playerHandViews[index];
     };
 
     this.startDealing = function(){
-        var self = this;
-        _.each(self.playerHandViews, function(playerHandView){
+        _.each(this.playerHandViews, function(playerHandView){
             playerHandView.render();
-        }, this);
+        });
     };
 
-    this.init();
-    //this.startDealing();
+    //hv is short for playerHandView
+    this.sortHand = function(hv){
+        hv.cards.sort(function(card1, card2){
+            return card1.value > card2.value;
+        });
+
+        hv.render();
+    };
+
+    //get rid of pairs in a hand
+    //cards can be sorted or not
+    this.sikou = function(hv){
+
+        var uniqueCards = [];
+        var pairs = [];
+
+       // _.filter(hv.cards, function(card){
+       //
+       //     // undefined if not found, or return the first Card found
+       //     var cardFound = _.findWhere(cardsNoPairs, {value: card.value});
+       //
+       //     //keep the ones not found
+       //     return cardFound == undefined;
+       // });
+        for(var i=0; i < hv.cards.length; i++){
+            //var cardFound = _.findWhere(cardsNoPairs, {value: hv.cards[i].value});
+            var cardIndex = _.findIndex(uniqueCards, {value: hv.cards[i].value});
+            if ( cardIndex == -1){
+                uniqueCards.push(hv.cards[i]);
+            } else {
+                console.log('find a matched: ', uniqueCards[cardIndex]);
+
+                //remove the card found from uniqueCards array
+                pairs.push(uniqueCards[cardIndex]);
+                pairs.push(hv.cards[i]);
+                uniqueCards.splice(cardIndex, 1);
+            }
+        }
+
+        //no change
+        if (uniqueCards.length === hv.cards.length){
+            return false;  //no pair
+        } else {
+            hv.cards = uniqueCards;
+            hv.removedCards = pairs;
+            return true;
+        }
+
+    };
+
+    //sort by card value
+    this.sortCards = function(){
+        _.each(this.playerHandViews, function(hv){
+            hv.cards.sort(function(card1, card2){
+                return card1.value > card2.value;
+            });
+        });
+    };
 
 
 

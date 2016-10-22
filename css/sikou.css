@@ -23,7 +23,7 @@ body {
   padding: .1em;
   display: inline-block; }
 
-.hidden {
+.backCard {
   background: lightgrey; }
 
 .Spades, .Clubs {
@@ -37,11 +37,12 @@ body {
   margin: 0 auto; }
 
 li.card {
-  width: 4rem;
-  height: 6rem; }
+  width: 6rem;
+  height: 8rem; }
 
-.throwAwayCards li.card {
-  witdth: 3rem;
-  height: 5rem; }
+.removedCards li.card {
+  witdth: 5rem;
+  height: 7rem;
+  opacity: .6; }
 
 /*# sourceMappingURL=sikou.css.map */

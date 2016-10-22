@@ -2,25 +2,44 @@ var HandView = function(id){
 
     'use strict';
 
-    //this.collection = Hand;
+    //need to have a series of ids attached to html element ready
+
+    this.option = {
+      cardView: null
+    };
 
     this.cards = [];
+
+    //for sikou game
+    this.removedCards = [];
+
+
+    this.renderRemovedCards = function(){
+        var html = '';
+        this.removedCards.forEach(function(card){
+            html += new CardView(card).render();
+        });
+        $('#removedCards2').html(html);
+    };
+
+
+    this.render2 = function(cards, id){
+        var html = '';
+        cards.forEach(function(card){
+            html += new CardView(card).render();
+        });
+        $(id).html(html);
+    };
+
+
     this.el = id;
-    
-    window.sth = this;
 
     this.render = function() {
-        var self = this;
         var html = '';
-
         this.cards.forEach(function(card){
             html += new CardView(card).render();
         });
-        // _.each(this.cards, function(card){
-        //     html += new CardView(card).render();
-        // });
-
-        $(self.el).html(html);
+        $(this.el).html(html);
     };
 
     this.renderOneCard = function(){

@@ -9,12 +9,11 @@
 // find pairs
 // get rid of pairs
 // show cards - toString prototype
-// Maybe don't need this moodel ? refactor
+// Maybe don't need this model ? refactor, just use cards[]
 
 var Hand = function (){
 
     this.cards = [];
-
 
     this.removeCard = function(){
         return this.cards.pop();
