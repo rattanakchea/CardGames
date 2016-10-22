@@ -1,12 +1,21 @@
-var HandView = function(id){
+
+// options as attribute object
+
+// { cardsId:'#player1', removedCardsId: '#removedCards1'}
+
+var HandView = function(id, options){
 
     'use strict';
 
-    //need to have a series of ids attached to html element ready
+    this.el = id;
 
-    this.option = {
-      cardView: null
-    };
+    //required ids
+    if (_.isObject(options) && options.hasOwnProperty('cardsId')
+        && options.hasOwnProperty('removedCardsId') ) {
+        this.options = options;
+    } else if (options) {  //defined, but not a matched object
+        console.log ('You need to pass required attr to handview');
+    }
 
     this.cards = [];
 
@@ -22,18 +31,22 @@ var HandView = function(id){
         $('#removedCards2').html(html);
     };
 
-
-    this.render2 = function(cards, id){
+    //used in Sikou games for 2 html element to render
+    this.render3 = function(){
         var html = '';
-        cards.forEach(function(card){
+        this.cards.forEach(function(card){
             html += new CardView(card).render();
         });
-        $(id).html(html);
+        $(options.cardsId).html(html);
+
+        html = '';
+        this.removedCards.forEach(function(card){
+            html += new CardView(card).render();
+        });
+        $(options.removedCardsId).html(html);
     };
 
-
-    this.el = id;
-
+    //used in BlackJack Game for a single id element
     this.render = function() {
         var html = '';
         this.cards.forEach(function(card){

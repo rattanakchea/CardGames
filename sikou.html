@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/sikou.css">
 </head>
 <body>
-<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+<nav class="navbar navbar-fixed-top">
     <a class="navbar-brand" href="index.html">Card Game</a>
     <ul class="nav navbar-nav">
         <li class="nav-item active">
@@ -45,6 +45,9 @@
                 <div class="col-xs-6 text-right">
                     <button id="sort" type="button" class="btn btn-warning hidden">Sort Cards</button>
                     <button id="sikou" type="button" class="btn btn-primary hidden">Get Rid of Pairs</button>
+
+                    <button id="passBtn" type="button" class="btn btn-warning hidden">Pass</button>
+                    <button id="sikouBtn" type="button" class="btn btn-primary hidden">Sikou</button>
                 </div>
 
             </div>
@@ -92,17 +95,29 @@
             <div class="row">
                 <div class="col-xs-6">
                     <p>Player 3</p>
-                    <div id="player3">
+                    <ul id="player3">
                         <li class="card"></li>
                         <li class="card"></li>
-                    </div>
+                        <li class="card"></li>
+                        <li class="card"></li>
+                        <li class="card"></li>
+                    </ul>
+
+                    <ul id="removedCards3" class="removedCards">
+                    </ul>
                 </div>
                 <div class="col-xs-6 text-right">
                     <p>Player 4</p>
-                    <div id="player4">
+                    <ul id="player4">
                         <li class="card"></li>
                         <li class="card"></li>
-                    </div>
+                        <li class="card"></li>
+                        <li class="card"></li>
+                        <li class="card"></li>
+                    </ul>
+
+                    <ul id="removedCards4" class="removedCards">
+                    </ul>
                 </div>
             </div>
         </div>

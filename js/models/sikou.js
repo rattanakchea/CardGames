@@ -20,8 +20,13 @@ var Sikou = function (numOfPlayers){
 
     for (var i=1; i <= numOfPlayers; i++){
 
-        var el = '#player'+i;
-        var handView = new HandView(el)
+        var options = {
+            cardsId:'#player'+i,
+            removedCardsId: '#removedCards'+i,
+            name: 'Player '+i
+        }
+
+        var handView = new HandView(null, options)
         this.playerHandViews.push(handView);
     }
 
@@ -55,7 +60,7 @@ var Sikou = function (numOfPlayers){
 
     this.startDealing = function(){
         _.each(this.playerHandViews, function(playerHandView){
-            playerHandView.render();
+            playerHandView.render3();
         });
     };
 
@@ -64,8 +69,7 @@ var Sikou = function (numOfPlayers){
         hv.cards.sort(function(card1, card2){
             return card1.value > card2.value;
         });
-
-        hv.render();
+        hv.render3();
     };
 
     //get rid of pairs in a hand
@@ -89,7 +93,7 @@ var Sikou = function (numOfPlayers){
             if ( cardIndex == -1){
                 uniqueCards.push(hv.cards[i]);
             } else {
-                console.log('find a matched: ', uniqueCards[cardIndex]);
+                console.log(hv.options.name, ' find a matched: ', uniqueCards[cardIndex]);
 
                 //remove the card found from uniqueCards array
                 pairs.push(uniqueCards[cardIndex]);
