@@ -17,8 +17,9 @@ var Sikou = function (numOfPlayers){
 
 
     for (var i=1; i <= numOfPlayers; i++){
-        var hand = new Hand();
-        var handView = new HandView(hand, '#player'+i)
+
+        var el = '#player'+i;
+        var handView = new HandView(el)
         this.playerHandViews.push(handView);
     }
 
@@ -47,10 +48,6 @@ var Sikou = function (numOfPlayers){
 
 
 
-
-
-    // this.playerHand = new Hand();
-    // this.playerHandView = new HandView(this.playerHand, '#your-hand');
 
 
 };

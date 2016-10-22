@@ -28,11 +28,12 @@ $( document ).ready(function() {
 
     function initGame(numOfPlayers){
         toggleBtn();
-        game = new Sikou(numOfPlayers);
+        window.game = game = new Sikou(numOfPlayers);
 
         console.log(game);
         game.playerHandViews[0].render();
         game.playerHandViews[1].render();
+        game.playerHandViews[2].render();
         debugger;
     }
 

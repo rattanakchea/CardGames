@@ -1,24 +1,32 @@
-var HandView = function(Hand, id){
+var HandView = function(id){
 
     'use strict';
 
-    this.collection = Hand;
+    //this.collection = Hand;
+
+    this.cards = [];
     this.el = id;
+    
+    window.sth = this;
 
     this.render = function() {
         var self = this;
         var html = '';
-        _.forEach(this.collection.cards, function(card){
+
+        this.cards.forEach(function(card){
             html += new CardView(card).render();
         });
+        // _.each(this.cards, function(card){
+        //     html += new CardView(card).render();
+        // });
 
         $(self.el).html(html);
     };
 
     this.renderOneCard = function(){
-        if (this.collection.cards.length > 1){
+        if (this.cards.length > 1){
 
-            var cardView = new CardView(this.collection.cards[0]);
+            var cardView = new CardView(this.cards[0]);
             var html = cardView.render();
             $(this.el).html(html);
         } else {
@@ -30,12 +38,12 @@ var HandView = function(Hand, id){
     this.add = function(card){
         if (_.isArray(card)) {
             while(card.length > 0){
-                this.collection.cards.push(card.pop());
+                this.cards.push(card.pop());
             }
             //concat return a new array
-            //this.collection.cards = this.collection.cards.concat(card);
+            //this.cards = this.cards.concat(card);
         } else {
-            this.collection.cards.push(card);
+            this.cards.push(card);
         }
     };
 
@@ -43,7 +51,7 @@ var HandView = function(Hand, id){
     this.getScore = function(){
         var score = 0;
         var ace = 0;
-        _.forEach(Hand.cards, function(card){
+        _.each(this.cards, function(card){
 
             var value = card.value;
             if (value > 9) {
@@ -63,4 +71,4 @@ var HandView = function(Hand, id){
         return score;
     };
 
-}
+};

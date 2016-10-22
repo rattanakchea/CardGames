@@ -9,16 +9,15 @@
 var BlackJack = function (){
 
     this.deck = new Deck();
-    this.dealerHand = new Hand();
-    this.playerHand = new Hand();
 
-    this.playerHandView = new HandView(this.playerHand, '#your-hand');
-    this.dealerHandView = new HandView(this.dealerHand, '#dealer-hand');
+    this.playerHandView = new HandView('#your-hand');
+    this.dealerHandView = new HandView('#dealer-hand');
 
 
+
+    ///not used below
     this.events = events;
     this.events.events = {}; //clear previous events when starting a new game
-
 
     this.events.on('playerWins', playerWins);
 
