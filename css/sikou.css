@@ -45,4 +45,7 @@ li.card {
   height: 7rem;
   opacity: .6; }
 
+li.card.selected {
+  border: 3px solid orangered; }
+
 /*# sourceMappingURL=sikou.css.map */

@@ -1,6 +1,6 @@
 
 
-var cardTemplate = '<li class="card <%= getSuit() %>"><%= getValue() %> <%= getSymbol() %></li>';
+var cardTemplate = '<li data-value="<%= getValue() %>" class="card <%= getSuit() %>"><%= getValue() %> <%= getSymbol() %></li>';
 
 var CardView = function(Card){
 

@@ -3,12 +3,19 @@
  */
 "use strict";
 
-// BlackJack Game Constructor
-
-//blackJack Game
+//Sikou Game
 var Sikou = function (numOfPlayers){
 
     var numOfPlayers = numOfPlayers || 4;
+
+
+    //TODO: need to save as reference and update
+    this.properties = {
+        lastThrownCardValue: null,
+        lastThrownByPlayer: null,
+        currentTurn: 0,
+        yourTurn: 1   //manual set as the 2nd player
+    };
 
     this.deck = new Deck();
 
