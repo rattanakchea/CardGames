@@ -100,7 +100,7 @@ var Sikou = function (numOfPlayers){
             if ( cardIndex == -1){
                 uniqueCards.push(hv.cards[i]);
             } else {
-                console.log(hv.options.name, ' find a matched: ', uniqueCards[cardIndex]);
+                console.log(hv.options.name, ' found a matched: ', uniqueCards[cardIndex]);
 
                 //remove the card found from uniqueCards array
                 pairs.push(uniqueCards[cardIndex]);

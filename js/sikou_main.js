@@ -4,7 +4,9 @@ $( document ).ready(function() {
 
     var numOfPlayers = 4;
 
-    var currentTurn = 0, yourTurn = 1, lastThrownByPlayer, lastThrownCardValue;
+    // lastThrowByPlayer saved the last position the card was thrown
+
+    var lastThrownByPlayer, currentTurn = 0, yourTurn = 1, lastThrownCardValue;
 
     
     var yourSelectedCardValue;   //the value of card you select
@@ -47,13 +49,10 @@ $( document ).ready(function() {
     $btn_noMatch.on('click', nextPlayer);  //go to next player
 
     $('#player2').on('click', 'li', function(){
-        console.log($(this));
         $(this).siblings().removeClass('selected');
         $(this).toggleClass('selected');
-
         yourSelectedCardValue = $(this).data('value');
         yourSelectedCardIndex = $(this).index();
-
         console.log('you selected ', yourSelectedCardValue);
     });
 
@@ -100,10 +99,6 @@ $( document ).ready(function() {
         var currentPlayer = game.playerHandViews[currentTurn];
         var currentPlayerCardsCount = currentPlayer.cards.length;
 
-        if (yourSelectedCardIndex > currentPlayerCardsCount-1) {
-            console.log('index of card being removed is wrong');
-            return false;
-        }
         //removed one card
         // return an array of one card
         var removedCard = currentPlayer.cards.splice(yourSelectedCardIndex, 1);
@@ -114,11 +109,11 @@ $( document ).ready(function() {
         //not efficient because it renders the whole handView
         currentPlayer.render3();
 
+        var gameOver = false;
         var cardStatus = currentPlayer.options.name + " gets rid of (" + removedCard[0].toString() + ')';
         if (currentPlayer.cards.length == 0) {
             var instruction = "Congratulation, " + currentPlayer.options.name + " is the winner.";
-            return true;
-            //game over
+            gameOver = true;
         } else {
             var instruction = "Please choose the next card to get rid of.";
 
@@ -131,7 +126,7 @@ $( document ).ready(function() {
         lastThrownCardValue = null;
         yourSelectedCardValue = null;
 
-        return false;
+        return gameOver;
     }
 
     // pre: user select a card from the the remaining cards[]
@@ -158,19 +153,21 @@ $( document ).ready(function() {
         currentPlayer.render3();
 
         lastThrownCardValue = yourSelectedCardValue;
-        lastThrownByPlayer = currentPlayer.options.name;
+        lastThrownByPlayer = currentTurn;
 
-        var cardStatus = currentPlayer.options.name + " gets rid of (" + removedCard[0].toString() + ')';
+        var cardStatus = currentPlayer.options.name + " throws " + removedCard[0];
+
         updateGameStatus(cardStatus, "Now proceeding to next player.");
+        console.log(cardStatus);
+        console.log("update last thrown player to: ", lastThrownByPlayer);
 
-        $btn_throw.removeClass('hidden');
+        $btn_throw.addClass('hidden');
+        $btn_noMatch.removeClass('hidden');
         $btn_noMatch.removeClass('hidden');
 
         //go to next player
 
-        setTimeout(function(){
-            nextPlayer();
-        }, 3000);
+        setTimeout(nextPlayer, 3000);
 
     }
 
@@ -218,24 +215,32 @@ $( document ).ready(function() {
         currentPlayer.removedCards.push(randomCard[0]);
 
         lastThrownCardValue = randomCard[0].getValue();
-        lastThrownByPlayer = currentPlayer.options.name;
+        lastThrownByPlayer = currentTurn;
 
         //not efficient because it renders the whole handView
         currentPlayer.render3();
-        updateGameStatus(currentPlayer.options.name + " gets rid of (" + randomCard[0].toString() + ')');
+        updateGameStatus(currentPlayer.options.name + " throws " + randomCard[0]);
 
-        setTimeout(nextPlayer(), 3000);
+        console.log(currentPlayer.options.name + " throws " + randomCard[0]);
+        console.log("update last thrown player to: ", lastThrownByPlayer);
+
+        setTimeout(nextPlayer, 3000);
     }
 
     function nextPlayer(){
+
         currentTurn = (currentTurn + 1) % numOfPlayers;
+        var currentPlayer = game.playerHandViews[currentTurn];
 
         if (currentTurn == yourTurn) {
+            console.log( currentPlayer.options.name + ' is searching for card: ' + lastThrownCardValue);
             updateGameStatus(null, ' your turn. Do you have the card of <strong>' + lastThrownCardValue + '</strong>?');
-            // find in your hand whether you have the card has the same value as lastThrownCardValue
-        } else {
 
-            setTimeout(findCard(), 3000);
+            // UI interruption by user input
+            return;
+
+        } else {
+            findCard();
 
         }
     }
@@ -244,7 +249,7 @@ $( document ).ready(function() {
 
         var currentPlayer = game.playerHandViews[currentTurn];
 
-        if (currentPlayer.options.name === lastThrownByPlayer) {
+        if (currentTurn === lastThrownByPlayer) {
             console.log('run through a full table');
 
             //make the remaing cards in the deck a circular array
@@ -255,11 +260,9 @@ $( document ).ready(function() {
             //display the Card to use
             var lastCardHtml = new CardView(lastCard).render();
 
-
             $('#topDeck').prepend(lastCardHtml);
 
             lastThrownCardValue = lastCard.getValue();
-            lastThrownByPlayer = currentPlayer.options.name;
 
             updateGameStatus("Use a card from the deck : " + lastCard);
             nextPlayer();
@@ -269,20 +272,22 @@ $( document ).ready(function() {
         console.log( currentPlayer.options.name + ' is searching for card: ' + lastThrownCardValue);
         //var currentPlayerCardsCount = currentPlayer.cards.length;
 
-        currentPlayer.cards.forEach(function(card, index){
-            if (card.getValue() === lastThrownCardValue) {
-                console.log('found card at index: ', index);
 
-                if (getRidOfMatchedCard(index)) {
+        for(var i=0; i< currentPlayer.cards.length; i++){
+            var card = currentPlayer.cards[i];
+
+            if (card.getValue() == lastThrownCardValue) {
+                console.log(currentPlayer.options.name + ' found ' + lastThrownCardValue + ' at index: ', i);
+                if (getRidOfMatchedCard(i)) {
                     //game over
                 } else{
                     getRidOfOneCard();
                 }
-
-                return;
+                return;  //exit function
             }
-        });
+        }
 
+        console.log( currentPlayer.options.name + ' finished searching and does not have card: ' + lastThrownCardValue);
 
         //not found
         nextPlayer();
