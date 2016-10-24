@@ -28,28 +28,30 @@
         <h1>Welcome to Si-Kou</h1>
         <p><a href="rule_of_sikou.html">Rule of The Game (view source code for readibility for now, :-)</a></p>
     </div>
-
+`
     <div class="row">
         <div class="game-info col-xs-12 col-sm-12">
             <h4 class="alert alert-info text-center"><span id="status_card">Let's play</span></h4>
             <h4 class="alert alert-success text-center"><span id="status_instruction">Instruction</span></h4>
 
             <div id="stats">
-                <p>Win: <span class="win">0</span>   | Lose: <span class="lose">0</span></p>
+                <p>Last Thrown Card Value: <span id="lastThrownCardValue"></span></p>
+                <p>Last Thrown Card by player: <span id="lastThrownByPlayer"></span></p>
+                <p>Current Turn <span id="currentTurn"></span></p>
             </div>
 
             <div class="gameControl">
                 <div class="col-xs-4">
-                    <button id="deal" type="button" class="btn btn-warning disabled">New Game</button>
+                    <button id="btn_newGame" type="button" class="btn btn-warning">New Game</button>
                 </div>
                 <div class="col-xs-4">
-                    <button id="btn_sort" type="button" class="btn btn-warning hidden">Sort Cards</button>
-                    <button id="btn_sikou" type="button" class="btn btn-primary hidden">Get Rid of Pairs</button>
+                    <button id="btn_sort" type="button" class="btn btn-warning">Sort Cards</button>
+                    <button id="btn_sikou" type="button" class="btn btn-primary">Get Rid of Pairs</button>
                 </div>
                 <div class="col-xs-4 text-right">
-                    <button id="btn_noMatch" type="button" class="btn btn-danger hidden">No Match</button>
-                    <button id="btn_match" type="button" class="btn btn-success hidden">Match</button>
-                    <button id="btn_throw" type="button" class="btn btn-success hidden">Throw</button>
+                    <button id="btn_noMatch" type="button" class="btn btn-danger">No Match</button>
+                    <button id="btn_match" type="button" class="btn btn-success">Match</button>
+                    <button id="btn_throw" type="button" class="btn btn-success">Throw</button>
                 </div>
 
             </div>
@@ -59,30 +61,20 @@
         <div class="game-canvas col-xs-12">
             <div class="row">
                 <div class="col-xs-6">
-                    <p>Player 1 (6 cards)</p>
-                    <ul id="player1">
-                        <li class="card"></li>
-                        <li class="card"></li>
-                        <li class="card"></li>
-                        <li class="card"></li>
-                        <li class="card"></li>
-                        <li class="card"></li>
+                    <p>Player 0 (6 cards)</p>
+                    <ul id="player0">
+                        <li class="card">&nbsp;</li>
                     </ul>
 
-                    <ul id="removedCards1" class="removedCards">
+                    <ul id="removedCards0" class="removedCards">
                     </ul>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <p>You - Player 2 (5 cards)</p>
-                    <ul id="player2">
-                        <li class="card"></li>
-                        <li class="card"></li>
-                        <li class="card"></li>
-                        <li class="card"></li>
-                        <li class="card"></li>
+                    <p>You - Player 1 (5 cards)</p>
+                    <ul id="player1">
                     </ul>
 
-                    <ul id="removedCards2" class="removedCards">
+                    <ul id="removedCards1" class="removedCards">
                     </ul>
                 </div>
             </div>
@@ -98,19 +90,23 @@
 
             <div class="row">
                 <div class="col-xs-6">
-                    <p>Player 4</p>
-                    <ul id="player4">
+                    <p>Player 3</p>
+                    <ul id="player3">
+                        <li class="card">&nbsp;</li>
                     </ul>
 
-                    <ul id="removedCards4" class="removedCards">
+                    <ul id="removedCards3" class="removedCards">
                     </ul>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <p>Player 3</p>
+                    <p>Player 2</p>
 
-                    <ul id="player3"></ul>
+                    <ul id="player2">
+                        <li class="card">&nbsp;</li>
+                    </ul>
 
-                    <ul id="removedCards3" class="removedCards">
+                    <ul id="removedCards2" class="removedCards">
+                        <li class="card">&nbsp;</li>
                     </ul>
                 </div>
             </div>

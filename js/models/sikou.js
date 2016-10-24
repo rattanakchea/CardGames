@@ -25,7 +25,7 @@ var Sikou = function (numOfPlayers){
     this.yourHandView;
 
 
-    for (var i=1; i <= numOfPlayers; i++){
+    for (var i=0; i < numOfPlayers; i++){
 
         var options = {
             cardsId:'#player'+i,
@@ -53,7 +53,7 @@ var Sikou = function (numOfPlayers){
         this.startDealing();
 
         //assign to player 2
-        this.assignPlayer(2)
+        this.assignPlayer(1)
     };
 
     //assign to player

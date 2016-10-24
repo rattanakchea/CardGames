@@ -8,14 +8,22 @@ $( document ).ready(function() {
 
     var lastThrownByPlayer, currentTurn = 0, yourTurn = 1, lastThrownCardValue;
 
+    var $lastThrownCardValue = $('#lastThrownCardValue'),
+        $lastThrownByPlayer = $('#lastThrownByPlayer'),
+        $currentTurn = $('#currentTurn');
+
+    function updateStats(){
+        $lastThrownCardValue.html(lastThrownCardValue);
+        $lastThrownByPlayer.html(lastThrownByPlayer);
+        $currentTurn.html(currentTurn);
+    }
     
     var yourSelectedCardValue;   //the value of card you select
     var yourSelectedCardIndex;
 
 
-    var game,
-        playerScore = 0,
-        dealerScore = 0;
+    var game = window.game;
+
 
     var ctrl = {
         player1HandView: null,
@@ -25,9 +33,8 @@ $( document ).ready(function() {
         yourHandView: null, // reference to player hand, control most game play
     };
 
-
     //cache DOM elements
-    var $btn_deal = $('#deal'),
+    var $btn_newGame = $('#btn_newGame'),
         $btn_sort = $('#btn_sort'), //hidden by default
         $btn_sikou = $('#btn_sikou'),  //hidden
 
@@ -37,10 +44,8 @@ $( document ).ready(function() {
 
         $status = $('#status');
 
-
-
     //event listeners
-    $btn_deal.on('click', startSikouGame);  //start the game
+    $btn_newGame.on('click', startSikouGame);  //start the game
     $btn_sort.on('click', sortHand);
     $btn_sikou.on('click', sikou);
     $btn_match.on('click', matchCards);
@@ -48,7 +53,7 @@ $( document ).ready(function() {
 
     $btn_noMatch.on('click', nextPlayer);  //go to next player
 
-    $('#player2').on('click', 'li', function(){
+    $('#player1').on('click', 'li', function(){
         $(this).siblings().removeClass('selected');
         $(this).toggleClass('selected');
         yourSelectedCardValue = $(this).data('value');
@@ -58,8 +63,9 @@ $( document ).ready(function() {
 
     // ++++++++++++++ Init Game ++++++++++++++++++++
     function initGame(numOfPlayers){
-        toggleBtn();
         window.game = game = new Sikou(numOfPlayers);
+
+        toggleBtns();
 
         ctrl.player1HandView = game.playerHandViews[0];
         ctrl.yourHandView = ctrl.player2HandView = game.playerHandViews[1];
@@ -71,10 +77,10 @@ $( document ).ready(function() {
 
         //get rid of pairs in each hand, except you, the player
         getRidOfPairs([ctrl.player1HandView, ctrl.player3HandView, ctrl.player4HandView])
-
-
         getRidOfOneCard();
 
+
+        updateStats();
         //debugger;
     }
 
@@ -94,6 +100,8 @@ $( document ).ready(function() {
             console.warn('yourSelectedCardValue: ', yourSelectedCardValue);
             console.warn('lastThrownCardValue: ', lastThrownCardValue);
         }
+
+        updateStats();
     }
     function getRidOfMatchedCard(yourSelectedCardIndex){
         var currentPlayer = game.playerHandViews[currentTurn];
@@ -117,8 +125,13 @@ $( document ).ready(function() {
         } else {
             var instruction = "Please choose the next card to get rid of.";
 
-            $btn_throw.removeClass('hidden');
-            $btn_match.removeClass('hidden');
+            //switch only for you
+            if (currentTurn == yourTurn){
+                $btn_throw.show();
+                $btn_noMatch.hide();
+                $btn_match.hide();
+            }
+
         }
 
         updateGameStatus(cardStatus, instruction);
@@ -126,6 +139,7 @@ $( document ).ready(function() {
         lastThrownCardValue = null;
         yourSelectedCardValue = null;
 
+        updateStats();
         return gameOver;
     }
 
@@ -161,12 +175,14 @@ $( document ).ready(function() {
         console.log(cardStatus);
         console.log("update last thrown player to: ", lastThrownByPlayer);
 
-        $btn_throw.addClass('hidden');
-        $btn_noMatch.removeClass('hidden');
-        $btn_noMatch.removeClass('hidden');
+        if (currentTurn == yourTurn){
+            $btn_throw.hide();
+            $btn_noMatch.show();
+            $btn_match.show();
+        }
 
+        updateStats();
         //go to next player
-
         setTimeout(nextPlayer, 3000);
 
     }
@@ -177,27 +193,30 @@ $( document ).ready(function() {
     function sortHand(){
         game.sortHand(ctrl.yourHandView);
 
-        $(this).toggleClass('hidden');
+        $(this).remove();
     }
 
     //get rid of pairs in a hand
     function sikou(){
         if (game.sikou(ctrl.yourHandView)){
             ctrl.yourHandView.render3();
-            ctrl.yourHandView.render3();
         } else {
             updateGameStatus(null, "No pair in your cards");
         }
-
-        $(this).toggleClass('hidden');
-        $btn_noMatch.toggleClass('hidden');
-        $btn_match.toggleClass('hidden');
+        $(this).hide();  //hide itself
+        $btn_noMatch.show();
+        $btn_match.show();
     }
 
-    function toggleBtn(){
-        $btn_deal.toggle('hidden');
-        $btn_sort.toggleClass('hidden');
-        $btn_sikou.toggleClass('hidden');
+    function toggleBtns(){
+        $btn_newGame.hide();
+        $btn_sort.show();
+        $btn_sikou.show();
+
+        $btn_noMatch.hide();
+        $btn_match.hide();
+        $btn_throw.hide();
+
     }
 
     // Easy get rid of a random card
@@ -225,57 +244,88 @@ $( document ).ready(function() {
         console.log("update last thrown player to: ", lastThrownByPlayer);
 
         setTimeout(nextPlayer, 3000);
+
+        updateStats();
     }
+
+
 
     function nextPlayer(){
 
         currentTurn = (currentTurn + 1) % numOfPlayers;
+        updateStats();
+
         var currentPlayer = game.playerHandViews[currentTurn];
+
+
+        if (currentTurn === lastThrownByPlayer){
+            console.log('run through a full table');
+            throwCardFromDeck();
+        }
+
+        else if (currentTurn == yourTurn) {
+            console.log( currentPlayer.options.name + ' is searching for card: ' + lastThrownCardValue);
+            updateGameStatus(null, ' your turn. Do you have the card of <strong>' + lastThrownCardValue + '</strong>?');
+
+            $btn_noMatch.show();
+            $btn_match.show();
+
+            // UI interruption by user input
+
+            return;
+
+        } else{
+
+            findCard();
+        }
+    }
+
+    //remove a card from a deck
+    function throwCardFromDeck(){
+        //make the remaining cards in the deck a circular array
+        var lastCard = game.deck.cards.pop();
+        //unshift put the lastCard into the front
+        game.deck.cards.unshift(lastCard);
+
+        //display the Card to use
+        var lastCardHtml = new CardView(lastCard).render();
+        $('#topDeck').prepend(lastCardHtml);
+
+        lastThrownCardValue = lastCard.getValue();
+        //important logic here, just move the last position one
+        // wrong-produce circular loop: lastThrownByPlayer = (currentTurn + 1) % numOfPlayers;
+
+        lastThrownByPlayer = (lastThrownByPlayer + 1) % numOfPlayers;
+        currentTurn = lastThrownByPlayer;
+
+        updateStats();
+
+        console.log('Throw a card from the deck: ', lastThrownCardValue);
+        console.log('Update last thrown card player ', lastThrownByPlayer);
+
+        updateGameStatus("Use a card from the deck : " + lastCard);
 
         if (currentTurn == yourTurn) {
             console.log( currentPlayer.options.name + ' is searching for card: ' + lastThrownCardValue);
             updateGameStatus(null, ' your turn. Do you have the card of <strong>' + lastThrownCardValue + '</strong>?');
-
+            $btn_noMatch.show();
+            $btn_match.show();
             // UI interruption by user input
             return;
-
-        } else {
+        } else{
             findCard();
-
         }
     }
 
     function findCard(){
 
         var currentPlayer = game.playerHandViews[currentTurn];
-
-        if (currentTurn === lastThrownByPlayer) {
-            console.log('run through a full table');
-
-            //make the remaing cards in the deck a circular array
-            var lastCard = game.deck.cards.pop();
-            //unshift put the lastCard into the front
-            game.deck.cards.unshift(lastCard);
-
-            //display the Card to use
-            var lastCardHtml = new CardView(lastCard).render();
-
-            $('#topDeck').prepend(lastCardHtml);
-
-            lastThrownCardValue = lastCard.getValue();
-
-            updateGameStatus("Use a card from the deck : " + lastCard);
-            nextPlayer();
-            return;
-        }
-
         console.log( currentPlayer.options.name + ' is searching for card: ' + lastThrownCardValue);
         //var currentPlayerCardsCount = currentPlayer.cards.length;
 
 
         for(var i=0; i< currentPlayer.cards.length; i++){
             var card = currentPlayer.cards[i];
-
             if (card.getValue() == lastThrownCardValue) {
                 console.log(currentPlayer.options.name + ' found ' + lastThrownCardValue + ' at index: ', i);
                 if (getRidOfMatchedCard(i)) {
