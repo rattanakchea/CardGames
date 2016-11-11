@@ -271,7 +271,6 @@ $( document ).ready(function() {
             $btn_match.show();
 
             // UI interruption by user input
-
             return;
 
         } else{
@@ -305,6 +304,7 @@ $( document ).ready(function() {
 
         updateGameStatus("Use a card from the deck : " + lastCard);
 
+        var currentPlayer = game.playerHandViews[currentTurn];
         if (currentTurn == yourTurn) {
             console.log( currentPlayer.options.name + ' is searching for card: ' + lastThrownCardValue);
             updateGameStatus(null, ' your turn. Do you have the card of <strong>' + lastThrownCardValue + '</strong>?');

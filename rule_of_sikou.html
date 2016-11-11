@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Rule of Sikou</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Card Games</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+    <a class="navbar-brand" href="index.html">Card Game</a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="blackjack.html">BlackJack</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="sikou.html">Si Kou</a>
+        </li>
+    </ul>
+</nav>
 
-    <h1>Rule of Sikou</h1>
+<div class="container">
+    <h1>Rule of Sikou (Rough Draft)</h1>
 
-    //Try to use markdown parser here
-
+    <!--Try to use markdown parser here-->
+    <pre>
     ++ Goal of the game
     The first person who gets rid of cards in their hands is the Winner.
     And collect a poll of money from other players.
@@ -19,15 +36,15 @@
 
     2. Each player get 5 cards, and the dealer get 6 cards
 
-    - We keep the remaining deck of cards in the middle of the table
+    3. We keep the remaining deck of cards in the middle of the table
 
-    - Get rids of the pairs in each hand
+    4. Get rids of the pairs in each hand
         + If the dealer has 3 pairs, dealer automatically becomes the winner
         + players can get rid of at most 2 pairs, and have 1 remain because they have odd number of cards.
 
-    - After getting rid of pairs, dealer can rid of ONE card in their hand, and place it in front of her
+    5. After getting rid of pairs, dealer can rid of ONE card in their hand, and place it in front of her
 
-    - Finding matched card:
+    6. Finding matched card:
         + In a clockwise circle, the next player check if they have the matched card thrown by the dealer
         + If found, they can get rid of the matched card, and throw an additional card away
         + If not found, it is repeated to the next player
@@ -36,12 +53,16 @@
         the next player position
 
 
-    -  The game continues until the stacks is empty, in which case, the stack starts over
+    7.  The game continues until the stacks is empty, in which case, the stack starts over
 
-    -  The games then continue from Step 6a.
+    8.  The games then continue from Step 6a.
 
+    </pre>
+    
+    <p>
+        <img src="img/sikou_flowchart_diagram.png" alt="">
+    </p>
 
-
-
+</div>
 </body>
 </html>
