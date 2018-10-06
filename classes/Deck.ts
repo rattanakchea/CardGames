@@ -36,4 +36,16 @@ export class Deck {
   isEmpty(): boolean {
     return this.cards.length === 0;
   }
+
+  //look at the first card
+  peek() {
+    if (!this.isEmpty()) {
+      return this.cards[0];
+    }
+    return null;
+  }
+
+  pop() {
+    return this.cards.pop();
+  }
 }

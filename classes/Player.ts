@@ -4,9 +4,13 @@ import { Card } from "./Card";
 // +throwCard();
 
 export class Player {
-  hand: Card[];
+  private hand: Card[];
 
   constructor() {
     this.hand = [];
+  }
+
+  addCard(card: Card) {
+    this.hand.push(card);
   }
 }

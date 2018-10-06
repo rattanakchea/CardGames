@@ -20,7 +20,16 @@ export class CardGame {
     }
   }
 
-  getPlayer(playerIndex) {
+  getPlayer(playerIndex: number) {
     return this.players[playerIndex];
+  }
+
+  dealCard(toPlayer: Player): void {
+    if (!this.deck.isEmpty()) {
+      let poppedCard = this.deck.pop();
+      toPlayer.addCard(poppedCard);
+    } else {
+      console.log("The deck is empty, cannot deal Card");
+    }
   }
 }
