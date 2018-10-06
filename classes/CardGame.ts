@@ -4,7 +4,6 @@ import { Player } from "./Player";
 export class CardGame {
   deck: Deck;
   numOfPlayers: number = 0;
-  players: Player[] = [];
 
   constructor(numOfPlayers: number) {
     if (numOfPlayers < 1) {
@@ -13,15 +12,6 @@ export class CardGame {
     }
     this.numOfPlayers = numOfPlayers;
     this.deck = new Deck();
-
-    for (let i = 0; i < numOfPlayers; i++) {
-      const player = new Player();
-      this.players.push(player);
-    }
-  }
-
-  getPlayer(playerIndex: number) {
-    return this.players[playerIndex];
   }
 
   dealCard(toPlayer: Player): void {

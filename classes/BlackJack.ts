@@ -15,4 +15,5 @@ let game = new BlackJack();
 let player1 = new Player();
 let player2 = new Player();
 
+
 console.log(game);
