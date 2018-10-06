@@ -1,16 +1,10 @@
 import { CardGame } from "./CardGame";
-import { Player } from "./Player";
+import { BlackJackPlayer } from "./BlackJackPlayer";
 
 // add logic for BlackJack card game
 export class BlackJack extends CardGame {
   constructor(numOfPlayers: number = 2) {
     super(numOfPlayers);
-  }
-
-  isBlackJack(player: Player) {
-    return (
-      (player.hasCard(1) && player.hasCard(10)) || player.getTotal() === 21
-    );
   }
 }
 
@@ -18,8 +12,8 @@ export class BlackJack extends CardGame {
 let game = new BlackJack();
 
 // two players with empty hands
-let dealer = new Player();
-let player1 = new Player();
+let dealer = new BlackJackPlayer();
+let player1 = new BlackJackPlayer();
 
 // deal 1 card to player 1, 2 to player 2
 game.dealCard(dealer, 2); //one card is face down
@@ -29,11 +23,11 @@ console.log("dealer:", dealer);
 console.log("player1:", player1);
 
 // check the cards of each player
-if (game.isBlackJack(player1) && !game.isBlackJack(dealer)) {
+if (player1.isBlackJack() && !dealer.isBlackJack) {
   console.log("Player 1 wins");
-} else if (game.isBlackJack(player1) && game.isBlackJack(dealer)) {
+} else if (player1.isBlackJack() && dealer.isBlackJack()) {
   console.log("This is a tie, both have BlackJack");
-} else if (game.isBlackJack(dealer)) {
+} else if (dealer.isBlackJack()) {
   console.log("Dealer wins");
 }
 
