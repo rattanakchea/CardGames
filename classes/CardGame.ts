@@ -14,12 +14,15 @@ export class CardGame {
     this.deck = new Deck();
   }
 
-  dealCard(toPlayer: Player): void {
-    if (!this.deck.isEmpty()) {
-      let poppedCard = this.deck.pop();
-      toPlayer.addCard(poppedCard);
-    } else {
-      console.log("The deck is empty, cannot deal Card");
+  // by default, deal one card
+  dealCard(toPlayer: Player, count: number = 1): void {
+    for (let i = 0; i < count; i++) {
+      if (!this.deck.isEmpty()) {
+        let poppedCard = this.deck.pop();
+        toPlayer.addCard(poppedCard);
+      } else {
+        console.log("The deck is empty, cannot deal Card");
+      }
     }
   }
 }
