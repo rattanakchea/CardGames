@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BlackJack game</title>
+</head>
+
+<body>
+    <h1>This page is for testing TS files</h1>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.22/system.js"></script>
+    <script type="text/javascript">
+        System.defaultJSExtensions = true;
+        System.import('BlackJack').then(function (module) {
+            new module.BlackJack();
+        })
+    </script>
+</body>
+
+</html>
