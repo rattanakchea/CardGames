@@ -22,11 +22,3 @@ export class Player {
     return total;
   }
 }
-
-// test player
-let p = new Player();
-p.addCard(new Card("heart", 1));
-p.addCard(new Card("heart", 7));
-
-console.log(p);
-console.log(p.getTotal());
